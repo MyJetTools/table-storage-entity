@@ -13,8 +13,9 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
     result.push_str("match line.get_name().unwrap() {");
 
     for field in fields {
+        result.push('"');
         result.push_str(&super::db_table_name_generator(&field.name));
-        result.push_str(" => {");
+        result.push_str("\" => {");
         result.push_str(&field.name);
         result.push_str(" = Some(line.get_value().unwrap().as_str().unwrap().to_string());}");
     }
