@@ -9,7 +9,7 @@ pub fn generate(ast: &syn::DeriveInput) -> TokenStream {
 
     let mut result = String::new();
 
-    result.push_str("impl crate::table_storage::TableStorageEntity for ");
+    result.push_str("impl my_azure_storage_sdk::table_storage::TableStorageEntity for ");
     result.push_str(struct_name.as_str());
     result.push_str(" {\n");
 
@@ -18,7 +18,7 @@ pub fn generate(ast: &syn::DeriveInput) -> TokenStream {
     result.push_str("}\n");
 
     result.push_str(
-        "fn populate_field_names(json: my_azure_storage_sdk::sdk_azure::table_storage::JsonFirstLineReader) -> Self {",
+        "fn populate_field_names(builder: crate::sdk_azure::table_storage::TableStorageQueryBuilder) -> Self {",
     );
     super::fn_populate::generate(&mut result, &fields);
     result.push_str("}\n");
