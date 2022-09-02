@@ -21,7 +21,7 @@ pub fn generate(ast: &syn::DeriveInput) -> TokenStream {
     result.push_str("}\n");
 
     result.push_str(
-        "fn populate_field_names(builder: &mut my_azure_storage_sdk::sdk_azure::table_storage::TableStorageQueryBuilder,) -> Self {",
+        "fn populate_field_names(builder: &mut my_azure_storage_sdk::sdk_azure::table_storage::TableStorageQueryBuilder,) {",
     );
     super::fn_populate::generate(&mut result, &fields);
     result.push_str("}\n");
