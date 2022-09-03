@@ -17,7 +17,11 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
             crate::reflection::PropertyType::USize => todo!(),
             crate::reflection::PropertyType::ISize => todo!(),
             crate::reflection::PropertyType::String => {
-                result.push_str("result.write_string(\"\")");
+                result.push_str("result.write_string_value(\"");
+                result.push_str(&super::db_table_name_generator(&field.name));
+                result.push_str("\", self.");
+                result.push_str(&field.name);
+                result.push_str(".as_str());\n");
             }
             crate::reflection::PropertyType::Str => todo!(),
             crate::reflection::PropertyType::Bool => todo!(),
