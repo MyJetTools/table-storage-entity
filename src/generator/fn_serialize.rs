@@ -3,6 +3,10 @@ use crate::reflection::StructProperty;
 pub fn generate(result: &mut String, fields: &[StructProperty]) {
     result.push_str("let mut result = my_json::json_writer::JsonObjectWriter::new();");
     for field in fields {
+        if field.name == "timestamp" {
+            continue;
+        }
+
         match &field.ty {
             crate::reflection::PropertyType::U8 => {}
             crate::reflection::PropertyType::I8 => todo!(),
