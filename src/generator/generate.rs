@@ -76,7 +76,7 @@ fn check_mandatory_fields(fields: &[StructProperty]) {
         panic!("{} must be String", ROW_KEY_FIELD);
     }
 
-    if !timestamp.unwrap().ty.is_string() {
-        panic!("{} must be String", TIMESTAMP_FIELD);
+    if !timestamp.unwrap().ty.is_option_of_string() {
+        panic!("{} must be Option<String>", TIMESTAMP_FIELD);
     }
 }
