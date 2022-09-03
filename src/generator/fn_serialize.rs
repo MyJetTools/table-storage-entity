@@ -33,9 +33,7 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
 
                 result.push_str("result.write_string_value(\"");
                 result.push_str(&super::db_table_name_generator(&field.name));
-                result.push_str("\", self.");
-                result.push_str(&field.name);
-                result.push_str(".as_str());\n");
+                result.push_str("\", value);\n");
 
                 result.push('}');
             }
