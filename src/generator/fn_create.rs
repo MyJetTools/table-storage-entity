@@ -23,11 +23,13 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
     result.push_str(" _ => {} } }");
 
     for field in fields {
-        result.push_str("if ");
-        result.push_str(&field.name);
-        result.push_str(".is_none() {panic!(\"");
-        result.push_str(&super::db_table_name_generator(&field.name));
-        result.push_str(" is not found\");}\n");
+        if !field.ty.is_option() {
+            result.push_str("if ");
+            result.push_str(&field.name);
+            result.push_str(".is_none() {panic!(\"");
+            result.push_str(&super::db_table_name_generator(&field.name));
+            result.push_str(" is not found\");}\n");
+        }
     }
 
     result.push_str("Self {");
@@ -36,7 +38,11 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
         result.push_str(&field.name);
         result.push_str(": ");
         result.push_str(&field.name);
-        result.push_str(".unwrap(),\n");
+        if field.ty.is_option() {
+            result.push_str(",\n");
+        } else {
+            result.push_str(".unwrap(),\n");
+        }
     }
 
     result.push('}');
