@@ -26,6 +26,10 @@ pub fn generate(ast: &syn::DeriveInput) -> TokenStream {
     super::fn_populate::generate(&mut result, &fields);
     result.push_str("}\n");
 
+    result.push_str("fn serialize(&self)->Vec<u8> {");
+    super::fn_serialize::generate(&mut result, &fields);
+    result.push_str("}\n");
+
     result.push_str("}\n");
 
     result.parse().unwrap()
