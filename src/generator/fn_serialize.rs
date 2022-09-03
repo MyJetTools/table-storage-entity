@@ -32,5 +32,5 @@ pub fn generate(result: &mut String, fields: &[StructProperty]) {
         }
     }
 
-    result.push_str("result.get_result()");
+    result.push_str("result.build()");
 }
