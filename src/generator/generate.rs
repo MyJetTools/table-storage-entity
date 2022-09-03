@@ -29,6 +29,8 @@ pub fn generate(ast: &syn::DeriveInput) -> TokenStream {
     result.push_str("fn serialize(&self)->Vec<u8> {");
     super::fn_serialize::generate(&mut result, &fields);
     result.push_str("}\n");
+    result.push_str("fn get_partition_key(&self)->&str {self.partition_key.as_str()}\n");
+    result.push_str("fn get_row_key(&self)->&str {self.row_key.as_str()}\n");
 
     result.push_str("}\n");
 
