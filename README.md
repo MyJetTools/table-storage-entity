@@ -46,8 +46,11 @@ use table_storage_entity::TableStorageEntity;
 #[derive(TableStorageEntity)]
 pub struct TestTableEntity {
     pub partition_key: String,
+    
     pub row_key: String,
+    
     pub timestamp: Option<String>,
+    
     #[ignore_table_storage_field]
     pub field_to_ignore: String,
 }
